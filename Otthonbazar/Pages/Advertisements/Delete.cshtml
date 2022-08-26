@@ -1,0 +1,82 @@
+﻿@page
+@model Otthonbazar.Pages.Advertisements.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Advertisement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.BuildDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.BuildDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.HalfRoom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.HalfRoom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.ImageUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.ImageUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.Room)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.Room)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.Size)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.Size)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.City.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertisement.AdvertisementType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Advertisement.AdvertisementType)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Advertisement.Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
