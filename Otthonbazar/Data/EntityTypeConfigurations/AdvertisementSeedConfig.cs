@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Otthonbazar.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
