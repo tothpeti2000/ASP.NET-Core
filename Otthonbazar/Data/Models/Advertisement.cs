@@ -6,33 +6,44 @@ namespace Otthonbazar.Data.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "A cím megadása kötelező")]
+        [Display(Name = "Cím")]
         public string Address { get; set; }
 
-        [Required]
+
+        [Required(ErrorMessage = "Az építés évének megadása kötelező")]
+        [Display(Name = "Építés éve")]
         public int BuildDate { get; set; }
 
+        [Display(Name = "Leírás")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "A fél szobák számának megadása kötelező")]
+        [Display(Name = "Fél szobák")]
         public int HalfRoom { get; set; }
 
+        [Display(Name = "Fénykép")]
         public string ImageUrl { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Az eladási ár megadása kötelező")]
+        [Display(Name = "Eladási ár")]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "A szobák számának megadása kötelező")]
+        [Display(Name = "Szobák")]
         public int Room { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Az alapterület megadása kötelező")]
+        [Display(Name = "Alapterület")]
         public int Size { get; set; }
 
-        [Required]
         public int CityId { get; set; }
+        [Required(ErrorMessage = "A város megadása kötelező")]
+        [Display(Name = "Város")]
         public City City { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "A típus megadása kötelező")]
+        [Display(Name = "Típus")]
         public AdvertisementType AdvertisementType { get; set; }
     }
 }

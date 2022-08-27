@@ -30,9 +30,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-page="/Advertisements/Index">Home</a></li>
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
+                    <li>
+                        <a asp-page="/Advertisements/Index">Hirdetések</a>
+                    </li>
+
+                    @if (Context.User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a asp-page="/Advertisements/Create">Hirdetés feladása</a>
+                        </li>
+                    }
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -45,7 +52,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - Otthonbazar</p>
+            <p>&copy; 2022 - Otthonbazar</p>
         </footer>
     </div>
 

@@ -5,74 +5,123 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h2>Hirdetés feladása</h2>
 
-<h4>Advertisement</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Advertisement.Address" class="control-label"></label>
-                <input asp-for="Advertisement.Address" class="form-control" />
+
+<form method="post" class="form-horizontal">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="row form-group">
+                <!-- TODO: Add another field -->
+                <label asp-for="Advertisement.City" class="col-lg-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="Advertisement.City.Zip" class="form-control" />
+                </div>
+                <span asp-validation-for="Advertisement.City" class="text-danger"></span>
+            </div>
+
+            <div class="row form-group">
+                <label asp-for="Advertisement.Address" class="col-lg-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="Advertisement.Address" class="form-control" />
+                </div>
                 <span asp-validation-for="Advertisement.Address" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.BuildDate" class="control-label"></label>
-                <input asp-for="Advertisement.BuildDate" class="form-control" />
-                <span asp-validation-for="Advertisement.BuildDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.Description" class="control-label"></label>
-                <input asp-for="Advertisement.Description" class="form-control" />
-                <span asp-validation-for="Advertisement.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.HalfRoom" class="control-label"></label>
-                <input asp-for="Advertisement.HalfRoom" class="form-control" />
-                <span asp-validation-for="Advertisement.HalfRoom" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.ImageUrl" class="control-label"></label>
-                <input asp-for="Advertisement.ImageUrl" class="form-control" />
-                <span asp-validation-for="Advertisement.ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.Price" class="control-label"></label>
-                <input asp-for="Advertisement.Price" class="form-control" />
-                <span asp-validation-for="Advertisement.Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.Room" class="control-label"></label>
-                <input asp-for="Advertisement.Room" class="form-control" />
-                <span asp-validation-for="Advertisement.Room" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.Size" class="control-label"></label>
-                <input asp-for="Advertisement.Size" class="form-control" />
-                <span asp-validation-for="Advertisement.Size" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.CityId" class="control-label"></label>
-                <select asp-for="Advertisement.CityId" class ="form-control" asp-items="ViewBag.CityId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Advertisement.AdvertisementType" class="control-label"></label>
-                <select asp-for="Advertisement.AdvertisementType" class="form-control"></select>
+
+            <div class="row form-group">
+                <label asp-for="Advertisement.AdvertisementType" class="col-lg-3 control-label"></label>
+                <div class="col-lg-4">
+                    <select asp-for="Advertisement.AdvertisementType" class="form-control"
+                            asp-items="Html.GetEnumSelectList<Otthonbazar.Data.Models.AdvertisementType>()">
+                    </select>
+                </div>
                 <span asp-validation-for="Advertisement.AdvertisementType" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+
+            <div class="row form-group">
+                <label asp-for="Advertisement.Price" class="col-lg-3 control-label"></label>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input asp-for="Advertisement.Price" class="form-control" />
+                        <span class="input-group-addon">M Ft</span>
+                    </div>
+                </div>
+                <span asp-validation-for="Advertisement.Price" class="text-danger"></span>
             </div>
-        </form>
+
+            <div class="row form-group">
+                <label asp-for="Advertisement.Size" class="col-lg-3 control-label"></label>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input asp-for="Advertisement.Size" class="form-control" />
+                        <span class="input-group-addon">m <sup>2</sup></span>
+                    </div>
+                </div>
+                <span asp-validation-for="Advertisement.Size" class="text-danger"></span>
+            </div>
+
+            <div class="row form-group">
+                <label asp-for="Advertisement.Room" class="col-lg-3 control-label"></label>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input asp-for="Advertisement.Room" class="form-control" />
+                        <span class="input-group-addon">szoba</span>
+                    </div>
+                </div>
+                <span asp-validation-for="Advertisement.Room" class="text-danger"></span>
+            </div>
+
+            <div class="row form-group">
+                <label asp-for="Advertisement.HalfRoom" class="col-lg-3 control-label"></label>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input asp-for="Advertisement.HalfRoom" class="form-control" />
+                        <span class="input-group-addon">fél szoba</span>
+                    </div>
+                </div>
+                <span asp-validation-for="Advertisement.HalfRoom" class="text-danger"></span>
+            </div>
+
+            <div class="row form-group">
+                <label asp-for="Advertisement.BuildDate" class="col-lg-3 control-label"></label>
+                <div class="col-lg-4">
+                    <input asp-for="Advertisement.BuildDate" class="form-control" />
+                </div>
+                <span asp-validation-for="Advertisement.BuildDate" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="row form-group">
+                <label asp-for="Advertisement.Description" class="col-lg-1 control-label"></label>
+                <div class="col-lg-12">
+                    <textarea asp-for="Advertisement.Description" class="form-control description-textarea"></textarea>
+                </div>
+                <span asp-validation-for="Advertisement.Description" class="text-danger"></span>
+            </div>
+
+            <div class="row form-group">
+                <label asp-for="Advertisement.ImageUrl" class="col-lg-1 control-label"></label>
+                <div class="col-lg-12">
+                    <input type="file" asp-for="Advertisement.ImageUrl" class="form-control" />
+                </div>
+                <span asp-validation-for="Advertisement.ImageUrl" class="text-danger"></span>
+            </div>
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <input type="submit" value="Hirdetés feladása" class="btn btn-default" />
+    </div>
+</form>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Vissza a listához</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }
