@@ -26,8 +26,28 @@ namespace Otthonbazar.Pages.Advertisements
 
         public async Task OnGetAsync()
         {
-            Advertisement = await _context.Advertisements
-                .Include(a => a.City).ToListAsync();
+            IQueryable<Advertisement> advertisements = _context.Advertisements.Include(a => a.City);
+
+            advertisements = advertisements
+                .Where(a => (Search.CityName == null || InputMatch(Search.CityName, a.City.Name)) &&
+                            (Search.PriceMin == null || a.Price >= Search.PriceMin.Value) &&
+                            (Search.PriceMax == null || a.Price <= Search.PriceMax.Value) &&
+                            (Search.SizeMin == null || a.Size >= Search.SizeMin.Value) &&
+                            (Search.SizeMax == null || a.Size <= Search.SizeMax.Value) &&
+                            (Search.RoomMin == null || GetTotalRooms(a) >= Search.RoomMin.Value) &&
+                            (Search.RoomMax == null || GetTotalRooms(a) <= Search.RoomMax.Value));
+
+            Advertisement = await advertisements.ToListAsync();
+        }
+
+        private bool InputMatch(string input, string compare)
+        {
+            return compare.ToUpper().Contains(input.ToUpper());
+        }
+
+        private int GetTotalRooms(Advertisement advertisement)
+        {
+            return advertisement.Room + advertisement.HalfRoom / 2;
         }
     }
 }
