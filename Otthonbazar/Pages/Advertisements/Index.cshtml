@@ -1,90 +1,50 @@
-﻿@page
+﻿@page "/"
 @model Otthonbazar.Pages.Advertisements.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Advertisements";
+
+    string GetImgUrl(string fileName) => string.IsNullOrEmpty(fileName) ? "https://via.placeholder.com/340x255" : $"images/{fileName}";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <div class="row">
+        <section class="col-lg-4">
+            <h2>Keresés</h2>
+        </section>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].BuildDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].HalfRoom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].Room)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].AdvertisementType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Advertisement) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuildDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HalfRoom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdvertisementType)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <section class="col-lg-8">
+            <h2>Hirdetések</h2>
+
+            <div class="row">
+                @foreach (var item in Model.Advertisement)
+                {
+                    <article class="col-lg-6">
+                        <a asp-page="./Details" asp-route-id="@item.Id">
+                            <img src="@GetImgUrl(item.ImageUrl)" alt="@item.AdvertisementType in @item.Address" class="img-responsive" />
+                        </a>
+
+                        <h3>
+                            <strong>
+                                <span class="">@item.Price MFt</span>
+                                <span class="pull-right">@item.Size m<sup>2</sup></span>
+                            </strong>
+                        </h3>
+
+                        <p>
+                            <span>@item.City.Zip @item.City.Name</span>
+                            <span class="pull-right">@item.Address</span>
+                        </p>
+
+                        <p>@Html.DisplayFor(modelItem => @item.AdvertisementType)</p>
+
+                        <dl>
+                            <dt class="pull-left">Szobák:</dt>
+                            <dd>@item.Room + @item.HalfRoom</dd>
+                        </dl>
+                    </article>
+                }
+            </div>
+        </section>
+    </div>
+</div>

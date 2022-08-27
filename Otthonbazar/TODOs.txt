@@ -1,0 +1,2 @@
+﻿Meg tudjuk javítani az AdvertisementType megjelenítését is, ehhez használjuk a
+Html.GetEnumSelectList<AdvertisementType>() kódrészletet!
