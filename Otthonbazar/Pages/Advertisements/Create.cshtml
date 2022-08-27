@@ -13,12 +13,17 @@
     <div class="row">
         <div class="col-lg-7">
             <div class="row form-group">
-                <!-- TODO: Add another field -->
                 <label asp-for="Advertisement.City" class="col-lg-3 control-label"></label>
-                <div class="col-lg-6">
-                    <input asp-for="Advertisement.City.Zip" class="form-control" />
+
+                <div class="col-lg-2">
+                    <input id="city-zip" asp-for="Advertisement.City.Zip" class="form-control" />
                 </div>
-                <span asp-validation-for="Advertisement.City" class="text-danger"></span>
+
+                <div class="col-lg-4">
+                    <input id="city-name" readonly asp-for="Advertisement.City.Name" class="form-control" />
+                </div>
+
+                <span asp-validation-for="Advertisement.City.Name" class="text-danger"></span>
             </div>
 
             <div class="row form-group">
@@ -124,4 +129,17 @@
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
+
+<script>
+    $(() => {
+        $("#city-zip").on("blur", async (event) => {
+            if ($("#city-zip").val() === "") {
+                return;
+            }
+            
+            const city = await $.get(`/Advertisements/Create?handler=Zip&zip=${event.currentTarget.value}`);
+            $("#city-name").val(city.name);
+        })
+    });
+</script>
 }

@@ -38,7 +38,6 @@ namespace Otthonbazar.Data.Models
         public int Size { get; set; }
 
         public int CityId { get; set; }
-        [Required(ErrorMessage = "A város megadása kötelező")]
         [Display(Name = "Város")]
         public City City { get; set; }
 

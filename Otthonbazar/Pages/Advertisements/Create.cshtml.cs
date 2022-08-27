@@ -25,6 +25,14 @@ namespace Otthonbazar.Pages.Advertisements
             return Page();
         }
 
+        public ActionResult OnGetZip(int zip)
+        {
+            var city = _context.Cities
+                .FirstOrDefault(c => c.Zip == zip.ToString());
+
+            return new JsonResult(city);
+        }
+
         [BindProperty]
         public Advertisement Advertisement { get; set; }
 

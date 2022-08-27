@@ -7,10 +7,10 @@ namespace Otthonbazar.Data.Models
     {
         public int Id { get; set; }
 
-        [Required, StringLength(4, MinimumLength = 4)]
+        [Required(ErrorMessage = "Az irányítószám megadása kötelező"), StringLength(4, MinimumLength = 4, ErrorMessage = "Az irányítószám legalább 4 karakter")]
         public string Zip { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "A város megadása kötelező")]
         public string Name { get; set; }
 
         public ICollection<Advertisement> Advertisements { get; set; }
