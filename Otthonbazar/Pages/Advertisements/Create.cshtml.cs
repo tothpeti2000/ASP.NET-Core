@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Otthonbazar.Data;
 using Otthonbazar.Data.Models;
 
@@ -36,12 +38,23 @@ namespace Otthonbazar.Pages.Advertisements
         [BindProperty]
         public Advertisement Advertisement { get; set; }
 
+        [Authorize]
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect($"/identity/account/login?returnUrl={Request.Path}");
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
+            var city = await _context.Cities
+                .FirstOrDefaultAsync(c => c.Zip == Advertisement.City.Zip);
+
+            Advertisement.City = city;
 
             _context.Advertisements.Add(Advertisement);
             await _context.SaveChangesAsync();
