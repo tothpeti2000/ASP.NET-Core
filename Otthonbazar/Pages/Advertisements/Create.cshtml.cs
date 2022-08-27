@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -38,8 +41,11 @@ namespace Otthonbazar.Pages.Advertisements
         [BindProperty]
         public Advertisement Advertisement { get; set; }
 
+        [BindProperty]
+        public IFormFile Upload { get; set; }
+
         [Authorize]
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync([FromServices] IHostingEnvironment hostingEnvironment)
         {
             if (!User.Identity.IsAuthenticated)
             {
@@ -49,6 +55,19 @@ namespace Otthonbazar.Pages.Advertisements
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            if (Upload != null && Upload.Length > 0)
+            {
+                var webRoot = hostingEnvironment.WebRootPath;
+                Advertisement.ImageUrl = $"image-{DateTime.UtcNow:yyyyMMdd-HHmmss}.jpg";
+                
+                var filePath = Path.Combine(webRoot, "images", Advertisement.ImageUrl);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Upload.CopyToAsync(stream);
+                }
             }
 
             var city = await _context.Cities
