@@ -12,14 +12,17 @@ namespace Otthonbazar.Pages.Advertisements
 {
     public class IndexModel : PageModel
     {
+        public IList<Advertisement> Advertisement { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public SearchModel Search { get; set; }
+
         private readonly Otthonbazar.Data.ApplicationDbContext _context;
 
         public IndexModel(Otthonbazar.Data.ApplicationDbContext context)
         {
             _context = context;
         }
-
-        public IList<Advertisement> Advertisement { get;set; }
 
         public async Task OnGetAsync()
         {
